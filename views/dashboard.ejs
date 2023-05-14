@@ -1,0 +1,38 @@
+<%- include('./partials/header.ejs')%>
+<title>Dashboard</title>
+<%- include('./partials/navbar.ejs')%>
+<div class="formmain">
+  <center>
+    <h1>Welcome , <%= user.firstName %> <%= user.lastName %> !</h1>
+    <br />
+    <h4>Number of Quizzes created : <%=user.quizCreated%></h4>
+    <br />
+    <button class="btn btn-primary">
+      <a href="/create-quiz" class="link-light" style="text-decoration: none"
+        >+ Create a New Quiz</a
+      >
+    </button>
+    <form action="/dashboard" method="post">
+      <select
+        class="form-select"
+        aria-label="Default select example"
+        style="margin-top: 20px; margin-bottom: 20px; width: 75%"
+        name="selected"
+      >
+        <option selected>Filter By Subject</option>
+        <option value="maths">Maths</option>
+        <option value="english">English</option>
+        <option value="science">Science</option>
+      </select>
+      <button class="btn btn-primary">Apply Filter</button>
+    </form>
+  </center>
+  <ol>
+    <% quizzes.forEach(element => { %>
+    <li>
+      <a href="/quiz/<%=element._id%>"> <%= element.title%> </a>
+    </li>
+    <% }) %>
+  </ol>
+</div>
+<%- include('./partials/footer.ejs')%>
